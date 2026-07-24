@@ -1,7 +1,7 @@
 terraform {
   required_version = ">= 1.0.0"
-  
-  # If you are using Terraform Cloud, uncomment and configure this section:
+
+  # Optional: If you are using Terraform Cloud, uncomment and set your details:
   # backend "remote" {
   #   organization = "YOUR-ORGANIZATION-NAME"
   #   workspaces {
@@ -10,20 +10,7 @@ terraform {
   # }
 }
 
-# Example test resource that doesn't cost anything or deploy real hardware
-resource "null_resource" "example" {
-  triggers = {
-    value = "Testing GitHub Actions workflow"
-  }
-}
-
-
-
-terraform {
-  required_version = ">= 1.0.0"
-}
-
-# Example test resource
+# Single test resource
 resource "null_resource" "example" {
   triggers = {
     value = "Testing GitHub Actions workflow"
