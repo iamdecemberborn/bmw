@@ -16,3 +16,16 @@ resource "null_resource" "example" {
     value = "Testing GitHub Actions workflow"
   }
 }
+
+
+
+terraform {
+  required_version = ">= 1.0.0"
+}
+
+# Example test resource
+resource "null_resource" "example" {
+  triggers = {
+    value = "Testing GitHub Actions workflow"
+  }
+}
