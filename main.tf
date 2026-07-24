@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1" # Make sure this matches where your role/resources live
+  region = "us-east-1"
 }
 
 # 1. Zip your main.py file
@@ -30,10 +30,7 @@ resource "aws_lambda_function" "my_lambda" {
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   function_name    = "my_github_actions_lambda"
-  
-  # Reference the ARN from the data source above:
   role             = data.aws_iam_role.existing_role.arn
-  
   handler          = "main.lambda_handler"
   runtime          = "python3.12"
 }
