@@ -1,18 +1,39 @@
 terraform {
   required_version = ">= 1.0.0"
 
-  # Optional: If you are using Terraform Cloud, uncomment and set your details:
-  # backend "remote" {
-  #   organization = "YOUR-ORGANIZATION-NAME"
-  #   workspaces {
-  #     name = "YOUR-WORKSPACE-NAME"
-  #   }
-  # }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
 }
 
-# Single test resource
-resource "null_resource" "example" {
-  triggers = {
-    value = "Testing GitHub Actions workflow"
-  }
+provider "aws" {
+  region = "us-east-1" # Make sure this matches where your role/resources live
+}
+
+# 1. Zip your main.py file
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_file = "main.py"
+  output_path = "lambda_function.zip"
+}
+
+# 2. Fetch your EXISTING IAM Role from AWS
+data "aws_iam_role" "existing_role" {
+  name = "decemberborn-role-f317dr01"
+}
+
+# 3. Deploy the AWS Lambda using the existing role
+resource "aws_lambda_function" "my_lambda" {
+  filename         = data.archive_file.lambda_zip.output_path
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+  function_name    = "my_github_actions_lambda"
+  
+  # Reference the ARN from the data source above:
+  role             = data.aws_iam_role.existing_role.arn
+  
+  handler          = "main.lambda_handler"
+  runtime          = "python3.12"
 }
