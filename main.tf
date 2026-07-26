@@ -33,4 +33,4 @@ resource "aws_lambda_function" "my_lambda" {
   role             = data.aws_iam_role.existing_role.arn
   handler          = "main.lambda_handler"
   runtime          = "python3.12"
-}  
+}
