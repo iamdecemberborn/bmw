@@ -29,7 +29,7 @@ data "aws_iam_role" "existing_role" {
 resource "aws_lambda_function" "my_lambda" {
   filename         = data.archive_file.lambda_zip.output_path
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
-  function_name    = "my_github_actions_lambda"
+  function_name    = "my_github_actions_lambda_v2"
   role             = data.aws_iam_role.existing_role.arn
   handler          = "main.lambda_handler"
   runtime          = "python3.12"
