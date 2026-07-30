@@ -1,0 +1,12 @@
+# Local Terraform state & plugin files
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Build outputs
+lambda_function.zip
+
+# Secrets / local variables
+*.tfvars
+*.tfvars.json
