@@ -97,9 +97,5 @@ def lambda_handler(event, context):
         }
         
     except Exception as e:
-        print(f"Error processing file {key} from bucket {bucket}: {str(e)}")
-        
+        print(f"Error processing file {key} from bucket {bucket}: {str(e)}")        
         raise e
-
-
-
