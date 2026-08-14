@@ -65,7 +65,7 @@ def lambda_handler(event, context):
     if key.startswith('output/'):
         return {
             'statusCode': 200,
-            'body': json.dumps('Skipped01 output folder trigger to prevent recursion loop.')
+            'body': json.dumps('Skipped output folder trigger to prevent recursion loop.')
         }
 
     try:
