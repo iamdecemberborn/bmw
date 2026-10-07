@@ -67,5 +67,3 @@ def lambda_handler(event, context):
             'body': json.dumps(f'Error processing file: {str(e)}')
         }
         
-
-    
