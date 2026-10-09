@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 s3_client = boto3.client('s3')
 
 def lambda_handler(event, context):
+    print("testing 0")
     # 1. Define your bucket and file paths
     # Note: Modify these to match your actual bucket and file names
     bucket_name = 'decemberborn'
@@ -66,4 +67,3 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps(f'Error processing file: {str(e)}')
         }
-        
